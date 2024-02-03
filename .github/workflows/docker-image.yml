@@ -22,6 +22,6 @@ jobs:
         DOCKER_USER: ${{secrets.DOCKER_USER}} #VARIABLE YA CREADA EN GIT ACTION
         DOCKER_PASSWORD: ${{secrets.DPCKER_PASSWORD}} #VARIABLE YA CREADA EN GIT ACTION
       run: | # este caracter indica que cada line son independientes
-        docker login -u $DOCKER_USER -P $DOCKER_PASSWORD
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     # - name: Build the Docker image
     #   run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
