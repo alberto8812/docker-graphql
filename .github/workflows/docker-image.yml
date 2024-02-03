@@ -23,5 +23,12 @@ jobs:
         DOCKER_PASSWORD: ${{secrets.DPCKER_PASSWORD}} #VARIABLE YA CREADA EN GIT ACTION
       run: | # este caracter indica que cada line son independientes
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - name: Build Doker Image #construir la imagen
+      run: |
+        docker build -t carlosvelasco783/docker-graphql:1.0.2 .
+    - name: Push Doker Image #enviar la imagen
+      run: |
+        docker push  carlosvelasco783/docker-graphql:1.0.2 .
     # - name: Build the Docker image
+    
     #   run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
