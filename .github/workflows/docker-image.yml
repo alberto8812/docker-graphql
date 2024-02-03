@@ -13,6 +13,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Checkout code #dar un nombre a la configuracion
+      uses: actions/checkout@v3
+      with: #anadimos la configuracion
+        feth-depth: 0 #realiza vien adentro en la comfiguracion del commit
+    - name:  Docker login  # se pueden definir  variables de entorno lo pueden usar directamente del secret
+      env:
+        DOCKER_USER: ${{secrets.DOCKER_USER}} #VARIABLE YA CREADA EN GIT ACTION
+        DOCKER_PASSWORD: ${{secrets.DPCKER_PASSWORD}} #VARIABLE YA CREADA EN GIT ACTION
+      run: | # este caracter indica que cada line son independientes
+        docker login -u $ DOCKER_USER -P $DOCKER_PASSWORD
+    # - name: Build the Docker image
+    #   run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
