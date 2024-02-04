@@ -26,7 +26,7 @@ jobs:
     - name: Build Doker Image #construir la imagen
       run: |
         docker build -t carlosvelasco783/docker-graphql:1.0.2 .
-        docker build -t  carlosvelasco783/docker-graphql:1.0.2 .
+        docker build -t  carlosvelasco783/docker-graphql:latest .
     - name: Push Doker Image #enviar la imagen
       run: |
         docker push  carlosvelasco783/docker-graphql:1.0.2
