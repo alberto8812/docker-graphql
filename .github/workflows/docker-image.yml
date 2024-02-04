@@ -17,20 +17,30 @@ jobs:
       uses: actions/checkout@v3
       with: #anadimos la configuracion
         feth-depth: 0 #realiza vien adentro en la comfiguracion del commit
+                      
+    - name: Git Semantic Version
+      uses: PaulHatch/semantic-version@v5.4.0
+      with:
+        major_patterm: "major:"
+        minor_patterm: "feat:"
+        version_format: "${major}.${minor}.${patch}-prerelease${increment}"
+        id: version
     - name:  Docker login  # se pueden definir  variables de entorno lo pueden usar directamente del secret
       env:
         DOCKER_USER: ${{secrets.DOCKER_USER}} #VARIABLE YA CREADA EN GIT ACTION
         DOCKER_PASSWORD: ${{secrets.DPCKER_PASSWORD}} #VARIABLE YA CREADA EN GIT ACTION
+        NEW_VERSION: ${{steps.version.outputs.version}}
       run: | # este caracter indica que cada line son independientes
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-    - name: Build Doker Image #construir la imagen
-      run: |
-        docker build -t carlosvelasco783/docker-graphql:1.0.2 .
-        docker build -t  carlosvelasco783/docker-graphql:latest .
-    - name: Push Doker Image #enviar la imagen
-      run: |
-        docker push  carlosvelasco783/docker-graphql:1.0.2
-        docker push  carlosvelasco783/docker-graphql:latest
+        echo: "New Version:$NEW_VERSION!!!!!"
+   # - name: Build Doker Image #construir la imagen
+      #run: |
+      #  docker build -t carlosvelasco783/docker-graphql:1.0.2 .
+     #   docker build -t  carlosvelasco783/docker-graphql:latest .
+    #- name: Push Doker Image #enviar la imagen
+    # run: |
+    #    docker push  carlosvelasco783/docker-graphql:1.0.2
+    #    docker push  carlosvelasco783/docker-graphql:latest
     # - name: Build the Docker image
     
     #   run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
