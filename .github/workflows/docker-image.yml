@@ -24,7 +24,7 @@ jobs:
         major_patterm: "major:"
         minor_patterm: "feat:"
         version_format: "${major}.${minor}.${patch}-prerelease${increment}"
-        id: version
+      id: version
     - name:  Docker login  # se pueden definir  variables de entorno lo pueden usar directamente del secret
       env:
         DOCKER_USER: ${{secrets.DOCKER_USER}} #VARIABLE YA CREADA EN GIT ACTION
